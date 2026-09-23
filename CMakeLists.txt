@@ -6,6 +6,8 @@ else()
   cmake_minimum_required(VERSION 3.18)
 endif()
 
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/common/bootstrap.cmake" NO_POLICY_SCOPE)
+
 project(source-record VERSION 0.4.8)
 set(PROJECT_FULL_NAME "Source Record")
 
@@ -23,9 +25,13 @@ target_sources(${PROJECT_NAME} PRIVATE
 
 
 if(BUILD_OUT_OF_TREE)
+	include(compilerconfig)
+	include(defaults)
+	include(helpers)
+
 	find_package(libobs REQUIRED)
 	find_package(obs-frontend-api REQUIRED)
-	include(cmake/ObsPluginHelpers.cmake)
+
 	set(OBS_FRONTEND_API_NAME "obs-frontend-api")
 else()
 	set(OBS_FRONTEND_API_NAME "frontend-api")
@@ -60,18 +66,8 @@ target_link_libraries(${PROJECT_NAME}
 	OBS::libobs)
 
 if(BUILD_OUT_OF_TREE)
-    if(NOT LIB_OUT_DIR)
-        set(LIB_OUT_DIR "/lib/obs-plugins")
-    endif()
-    if(NOT DATA_OUT_DIR)
-        set(DATA_OUT_DIR "/share/obs/obs-plugins/${PROJECT_NAME}")
-    endif()
-    set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
-    install(TARGETS ${PROJECT_NAME}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_OUT_DIR})
-    install(DIRECTORY data/locale
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/${DATA_OUT_DIR})
-	setup_plugin_target(${PROJECT_NAME})
+    set_target_properties_plugin(${CMAKE_PROJECT_NAME} PROPERTIES OUTPUT_NAME ${_name})
+
 else()
     target_include_directories(${PROJECT_NAME} PRIVATE
         "${CMAKE_SOURCE_DIR}/UI/obs-frontend-api")
@@ -79,6 +75,5 @@ else()
 		set_target_properties_obs(${PROJECT_NAME} PROPERTIES FOLDER "plugins/exeldro" PREFIX "")
 	else()
 		set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "plugins/exeldro")
-		setup_plugin_target(${PROJECT_NAME})
 	endif()
 endif()

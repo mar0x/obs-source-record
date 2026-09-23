@@ -76,8 +76,15 @@
         },
         "linux-x86_64": {
             "qtVersion": 6
+        },
+        "macos": {
+            "bundleId": "com.example.plugintemplate-for-obs"
         }
     },
     "name": "source-record",
-    "version": "0.4.8"
+    "version": "0.4.8",
+    "displayName": "Plugin Template for OBS",
+    "author": "Your Name Here",
+    "website": "https://example.com",
+    "email": "me@example.com"
 }
