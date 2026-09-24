@@ -1923,7 +1923,7 @@ struct obs_source_info source_record_filter_info = {
 };
 
 OBS_DECLARE_MODULE()
-OBS_MODULE_USE_DEFAULT_LOCALE("source-record", "en-US")
+OBS_MODULE_USE_DEFAULT_LOCALE("obs-source-record", "en-US")
 MODULE_EXPORT const char *obs_module_description(void)
 {
 	return "Source Record Filter";

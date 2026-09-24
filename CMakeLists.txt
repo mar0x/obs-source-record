@@ -8,7 +8,7 @@ endif()
 
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/common/bootstrap.cmake" NO_POLICY_SCOPE)
 
-project(source-record VERSION 0.4.8)
+project(obs-source-record VERSION 0.4.8)
 set(PROJECT_FULL_NAME "Source Record")
 
 # Set new UUIDs when you start to create a new plugin.

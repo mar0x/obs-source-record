@@ -36,7 +36,7 @@
             "bundleId": "com.example.plugintemplate-for-obs"
         }
     },
-    "name": "source-record",
+    "name": "obs-source-record",
     "version": "0.4.8",
     "displayName": "Plugin Template for OBS",
     "author": "Your Name Here",
